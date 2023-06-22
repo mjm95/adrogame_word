@@ -6295,6 +6295,7 @@ self.C3_JsPropNameTable = [
 	{AddedWords: 0},
 	{LevelDone: 0},
 	{score: 0},
+	{offset: 0},
 	{vCurWords: 0},
 	{List: 0},
 	{Dir: 0},
@@ -6413,12 +6414,12 @@ self.C3_ExpressionFuncs = [
 		() => -10,
 		() => 0,
 		() => "main",
-		() => 2,
 		() => 1,
 		p => {
 			const v0 = p._GetNode(0).GetVar();
 			return () => v0.GetValue();
 		},
+		() => 2,
 		() => 3,
 		() => 4,
 		() => "",
@@ -6551,7 +6552,13 @@ self.C3_ExpressionFuncs = [
 			const f1 = p._GetNode(1).GetBoundMethod();
 			const v2 = p._GetNode(2).GetVar();
 			const f3 = p._GetNode(3).GetBoundMethod();
-			return () => ((f0(0) - 290) + (Math.sin(C3.toRadians(((360 / f1(v2.GetValue())) * f3()))) * 180));
+			const v4 = p._GetNode(4).GetVar();
+			return () => (((f0(0) - 290) + (Math.sin(C3.toRadians(((360 / f1(v2.GetValue())) * f3()))) * 180)) - v4.GetValue());
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			return () => (n0.ExpObject() + v1.GetValue());
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
@@ -6659,6 +6666,11 @@ self.C3_ExpressionFuncs = [
 			return () => ((f0() - 1) / 20);
 		},
 		() => "pos",
+		p => {
+			const n0 = p._GetNode(0);
+			const v1 = p._GetNode(1).GetVar();
+			return () => (n0.ExpObject() - v1.GetValue());
+		},
 		() => "size",
 		p => {
 			const n0 = p._GetNode(0);
